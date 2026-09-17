@@ -10,12 +10,16 @@ DATA_FILE = Path(__file__).resolve().parent / "data" / "sales.csv"
 
 
 def main() -> None:
-    df = pd.read_csv(DATA_FILE)
-
-    # Total for each row (quantity * price)
-    df["total"] = df.apply(
-        lambda row: calculate_total(row["quantity"], row["price"]), axis=1
-    )
+    try:
+        df = pd.read_csv(DATA_FILE)
+    except (FileNotFoundError, OSError):
+        print(f"Error: no se encontró el archivo {DATA_FILE}. Asegúrate de que data/sales.csv existe.")
+        return
+    else:
+        # Total for each row (quantity * price)
+        df["total"] = df.apply(
+            lambda row: calculate_total(row["quantity"], row["price"]), axis=1
+        )
 
     print("Sales Data:")
     for _, row in df.iterrows():

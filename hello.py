@@ -17,7 +17,7 @@ def main() -> None:
         print("API_KEY not found. Copy .env.example to .env and fill in your values.")
         return
 
-    print(f"API Key: {api_key}")
+    print(f"API Key: {api_key[:4]}...")
     print(f"Debug mode: {debug}")
 
 
